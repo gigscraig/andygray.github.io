@@ -19,11 +19,11 @@
     <div class="well">
         <!-- <pre>{{ golfers }}</pre> -->
         <form class="form-horizontal">
-            <select name="home" ng-model="home">
+            <select class="form-control" name="home" ng-model="home">
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}"/>{{ golfer.name}}</option>       
             </select>
-            Beat
-            <select name="away" ng-model="away">
+            beat
+            <select class="form-control" name="away" ng-model="away">
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}"/>{{ golfer.name}}</option>    
             </select>
             <input type="button" class="btn btn-success" value="Add Result">
