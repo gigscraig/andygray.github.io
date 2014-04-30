@@ -26,7 +26,7 @@
             <select class="form-control" name="away" ng-model="away">
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}"/>{{ golfer.name}}</option>    
             </select>
-            <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()">
+            <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture(home, away)">
         </form>
     </div>
 
@@ -42,8 +42,8 @@
             $scope.fixtures = $firebase(fixtures_ref);
             $scope.golfers = $firebase(golfers_ref);
 
-            $scope.addFixture = function() {
-                fixtures_ref.push({"timestamp": 0, "result": "andy beat kevin 2&1", "stats": [{"golfer":"andy", "win": 1}, {"golfer":"kevin", "lose": 1}]});
+            $scope.addFixture = function(home, away) {
+                fixtures_ref.push({"timestamp": 0, "result": "#{home} beat #{away}", "stats": [{"golfer": "#{home}", "win": 1}, {"golfer": "#{away}", "lose": 1}]});
             };
       
         }
