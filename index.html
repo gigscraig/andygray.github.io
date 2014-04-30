@@ -26,21 +26,26 @@
             <select class="form-control" name="away" ng-model="away">
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}"/>{{ golfer.name}}</option>    
             </select>
-            <input type="button" class="btn btn-success" value="Add Result">
+            <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()">
         </form>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <script type="text/javascript">
     angular.module('league', ['firebase']).controller('LeagueCtrl', ['$scope', '$firebase',
         function($scope, $firebase) {
             var fixtures_ref = new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/');
             var golfers_ref = new Firebase('https://shining-fire-8454.firebaseio.com/golfers/');
+
             $scope.fixtures = $firebase(fixtures_ref);
             $scope.golfers = $firebase(golfers_ref);
+
+            $scope.addFixture = function() {
+                fixtures_ref.push({"timestamp": 0, "result": "andy beat kevin 2&1", "stats": [{"golfer":"andy", "win": 1}, {"golfer":"kevin", "lose": 1}]});
+            };
+      
         }
     ]);
     </script>
