@@ -1,0 +1,9 @@
+{
+	"golfers": ["andy", "paul", "scott", "kevin"],
+	"fixtures":[
+		{"timestamp": 1398845244000, "result": "andy beat kevin 2&1", "stats": [{"golfer":"andy", "win": 1}, {"golfer":"kevin", "lose": 1}]},
+		{"timestamp": 1398845244000, "result": "paul beat scott 4&3", "stats": [{"golfer":"paul", "win": 1}, {"golfer":"scott", "lose": 1}]},
+		{"timestamp": 1398845244000, "result": "paul drew with andy", "stats": [{"golfer":"paul", "draw": 1}, {"golfer":"andy", "draw": 1}]},
+		{"timestamp": 1398845244000, "result": "kevin beat andy 5&4", "stats": [{"golfer":"kevin", "win": 1, "bonus": 1}, {"golfer":"andy", "lose": 1}]}
+		]
+}
