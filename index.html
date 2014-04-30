@@ -6,11 +6,28 @@
     <title>Summer League</title>
 </head>
 
-<body ng-app="league">
-    <div class="well" ng-controller="LeagueCtrl">
-        <div ng-cloak ng-repeat="fixture in fixtures">
-            <em>{{fixture.timestamp | date:'mediumDate'}}</em>{{fixture.result}}
-        </div>
+<body ng-app="league" ng-controller="LeagueCtrl">
+    <div class="well">
+        <!-- <pre>{{ fixtures }}</pre> -->
+        <ul>
+          <li ng-cloak ng-repeat="fixture in fixtures">
+              <em>{{fixture.timestamp | date:'mediumDate'}}</em>{{fixture.result}}
+          </li>
+        </ul>
+    </div>
+
+    <div class="well">
+        <!-- <pre>{{ golfers }}</pre> -->
+        <form class="form-horizontal">
+            <select name="home" ng-model="home">
+                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}"/>{{ golfer.name}}</option>       
+            </select>
+            Beat
+            <select name="away" ng-model="away">
+                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}"/>{{ golfer.name}}</option>    
+            </select>
+            <input type="button" class="btn btn-success" value="Add Result">
+        </form>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
@@ -20,8 +37,10 @@
     <script type="text/javascript">
     angular.module('league', ['firebase']).controller('LeagueCtrl', ['$scope', '$firebase',
         function($scope, $firebase) {
-            var ref = new Firebase('https://shining-fire-8454.firebaseio.com/fixtures');
-            $scope.fixtures = $firebase(ref);
+            var fixtures_ref = new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/');
+            var golfers_ref = new Firebase('https://shining-fire-8454.firebaseio.com/golfers/');
+            $scope.fixtures = $firebase(fixtures_ref);
+            $scope.golfers = $firebase(golfers_ref);
         }
     ]);
     </script>
