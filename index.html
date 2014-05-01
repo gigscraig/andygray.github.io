@@ -8,32 +8,43 @@
 
 <body ng-app="league" ng-controller="LeagueCtrl">
 
-    <div class="well">
+    <div class="well col-sm-6 col col-sm-offset-3">
         <!--<pre>{{ table }}</pre>-->
-        <ul>
-          <li ng-cloak ng-repeat="(key, value) in table">
-              <em>{{ key }}</em>{{ value }}
-          </li>
-        </ul>
+        <table class="table table-striped">
+            <tr>
+                <th>Golfer</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th>Pts</th>
+            </tr>
+            <tr ng-cloak ng-repeat="(key, value) in table">
+                <td>{{ key }}</td>
+                <td>{{ value.win }}</td>
+                <td>{{ value.draw }}</td>
+                <td>{{ value.lose }}</td>
+                <td>{{ (value.win * 3) + value.draw }}</td>
+            </tr>
+        </table>
     </div>
 
-    <div class="well">
+    <div class="well col-sm-6 col-sm-offset-3">
         <!-- <pre>{{ fixtures }}</pre> -->
         <ul>
-          <li ng-cloak ng-repeat="fixture in fixtures">
-              <em>{{fixture.timestamp | date:'mediumDate'}}</em>{{fixture.result}}
-          </li>
+            <li ng-cloak ng-repeat="fixture in fixtures">
+                <em>{{fixture.timestamp | date:'mediumDate'}}</em><span class="pull-right">{{fixture.result}}</span>
+            </li>
         </ul>
     </div>
 
-    <div class="well">
+    <div class="well col-sm-6 col-sm-offset-3">
         <form class="form-horizontal">
             <select class="form-control" name="home" ng-model="home">
-                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}"/>{{ golfer.name}}</option>       
+                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
             beat
             <select class="form-control" name="away" ng-model="away">
-                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}"/>{{ golfer.name}}</option>    
+                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
             <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()">
             <input type="button" class="btn" value="Generate Table" ng-click="generateTable()">
@@ -56,15 +67,43 @@
             $scope.generateTable = function() {
                 angular.forEach($scope.golfers, function(value, key) {
                     if (value.name) {
-                        $scope.table[value.name] = {"win": 0, "lose": 0, "draw": 0};
+                        $scope.table[value.name] = {
+                            "win": 0,
+                            "lose": 0,
+                            "draw": 0
+                        };
+                    }
+                });
+
+                angular.forEach($scope.fixtures, function(fvalue, fkey) {
+                    if (fvalue.stats) {
+                        angular.forEach(fvalue.stats, function(svalue, skey) {
+                            if ($scope.table[svalue.golfer]) {
+                                angular.forEach(["win", "lose", "draw"], function(type) {
+                                    if (svalue[type]) {
+                                        $scope.table[svalue.golfer][type] = $scope.table[svalue.golfer][type] + svalue[type];
+                                    }
+                                });
+                            }
+                        });
                     }
                 });
             };
 
             $scope.addFixture = function() {
-                fixtures_ref.push({"timestamp": new Date().getTime(), "result": $scope.home + " beat " + $scope.away, "stats": [{"golfer": "" + $scope.home, "win": 1}, {"golfer": "" + $scope.away, "lose": 1}]});
+                fixtures_ref.push({
+                    "timestamp": new Date().getTime(),
+                    "result": $scope.home + " beat " + $scope.away,
+                    "stats": [{
+                        "golfer": "" + $scope.home,
+                        "win": 1
+                    }, {
+                        "golfer": "" + $scope.away,
+                        "lose": 1
+                    }]
+                });
             };
-      
+
         }
     ]);
     </script>
