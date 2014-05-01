@@ -18,8 +18,8 @@
                 <th>L</th>
                 <th>Pts</th>
             </tr>
-            <tr ng-cloak ng-repeat="(key, value) in table">
-                <td>{{ key }}</td>
+            <tr ng-cloak ng-repeat="value in trows|orderBy:'value.win'">
+                <td>{{ value.name }}</td>
                 <td>{{ value.win }}</td>
                 <td>{{ value.draw }}</td>
                 <td>{{ value.lose }}</td>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="well col-sm-6 col-sm-offset-3">
-        <form class="form-horizontal">
+        <form name="fixform" class="form-horizontal" novalidate>
             <select class="form-control" name="home" ng-model="home">
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
@@ -47,13 +47,13 @@
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
             <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()">
-            <input type="button" class="btn" value="Generate Table" ng-click="generateTable()">
         </form>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script type="text/javascript">
     angular.module('league', ['firebase']).controller('LeagueCtrl', ['$scope', '$firebase',
         function($scope, $firebase) {
@@ -62,12 +62,13 @@
 
             $scope.fixtures = $firebase(fixtures_ref);
             $scope.golfers = $firebase(golfers_ref);
-            $scope.table = {};
 
-            $scope.generateTable = function() {
+            $scope.$watch('fixtures', function() {
+                var table = {};
                 angular.forEach($scope.golfers, function(value, key) {
                     if (value.name) {
-                        $scope.table[value.name] = {
+                        table[value.name] = {
+                            "name": "" + value.name,
                             "win": 0,
                             "lose": 0,
                             "draw": 0
@@ -78,30 +79,34 @@
                 angular.forEach($scope.fixtures, function(fvalue, fkey) {
                     if (fvalue.stats) {
                         angular.forEach(fvalue.stats, function(svalue, skey) {
-                            if ($scope.table[svalue.golfer]) {
+                            if (table[svalue.golfer]) {
                                 angular.forEach(["win", "lose", "draw"], function(type) {
                                     if (svalue[type]) {
-                                        $scope.table[svalue.golfer][type] = $scope.table[svalue.golfer][type] + svalue[type];
+                                        table[svalue.golfer][type] = table[svalue.golfer][type] + svalue[type];
                                     }
                                 });
                             }
                         });
                     }
                 });
-            };
+
+                $scope.trows = _.values(table);
+            }, true);
 
             $scope.addFixture = function() {
-                fixtures_ref.push({
-                    "timestamp": new Date().getTime(),
-                    "result": $scope.home + " beat " + $scope.away,
-                    "stats": [{
-                        "golfer": "" + $scope.home,
-                        "win": 1
-                    }, {
-                        "golfer": "" + $scope.away,
-                        "lose": 1
-                    }]
-                });
+                if ($scope.home && $scope.away) {
+                    fixtures_ref.push({
+                        "timestamp": new Date().getTime(),
+                        "result": $scope.home + " beat " + $scope.away,
+                        "stats": [{
+                            "golfer": "" + $scope.home,
+                            "win": 1
+                        }, {
+                            "golfer": "" + $scope.away,
+                            "lose": 1
+                        }]
+                    });
+                }
             };
 
         }
