@@ -55,7 +55,9 @@
 
             $scope.generateTable = function() {
                 angular.forEach($scope.golfers, function(value, key) {
-                    $scope.table[value.name] = {"win": 0, "lose": 0, "draw": 0};
+                    if (value.name) {
+                        $scope.table[value.name] = {"win": 0, "lose": 0, "draw": 0};
+                    }
                 });
             };
 
