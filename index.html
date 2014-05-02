@@ -43,14 +43,15 @@
 
     <div class="well col-sm-6 col-sm-offset-3">
         <form name="fixform" class="form-horizontal" novalidate>
-            <select class="form-control" name="home" ng-model="home">
+            <select class="form-control" name="home" ng-model="home" required>
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
             beat
-            <select class="form-control" name="away" ng-model="away">
+            <select class="form-control" name="away" ng-model="away" required>
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
-            <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()">
+            <input type="text" class="form-control" name="result" ng-model="result" placeholder="result">
+            <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()" ng-disabled="fixform.$invalid">
             <input type="button" class="btn" value="Generate Table" ng-click="generateTable()">
         </form>
     </div>
@@ -109,7 +110,7 @@
                 if ($scope.home && $scope.away) {
                     fixtures_ref.push({
                         "timestamp": new Date().getTime(),
-                        "result": $scope.home + " beat " + $scope.away,
+                        "result": $scope.home + " beat " + $scope.away + " " + $scope.result,
                         "stats": [{
                             "golfer": "" + $scope.home,
                             "win": 1
