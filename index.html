@@ -103,35 +103,7 @@
                 // $scope.$apply(); -- doesn't work as expected!!
             });
 
-            $scope.$watch('fixtures', function() {
-                var table = {};
-                angular.forEach($scope.golfers, function(value, key) {
-                    if (value.name) {
-                        table[value.name] = {
-                            "name": "" + value.name,
-                            "win": 0,
-                            "lose": 0,
-                            "draw": 0
-                        };
-                    }
-                });
-
-                angular.forEach($scope.fixtures, function(fvalue, fkey) {
-                    if (fvalue.stats) {
-                        angular.forEach(fvalue.stats, function(svalue, skey) {
-                            if (table[svalue.golfer]) {
-                                angular.forEach(["win", "lose", "draw"], function(type) {
-                                    if (svalue[type]) {
-                                        table[svalue.golfer][type] = table[svalue.golfer][type] + svalue[type];
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
-
-                $scope.trows = _.values(table);
-            }, true);
+            $scope.$watch('fixtures', $scope.generateTable, true);
 
             $scope.addFixture = function() {
                 if ($scope.home && $scope.away) {
