@@ -101,6 +101,7 @@
 
             $scope.fixtures.$on('loaded', function(data) {
                 console.log(data);
+                // $scope.generateTable(); -- doesn't work as expected!!
                 // $scope.$apply(); -- doesn't work as expected!!
             });
 
