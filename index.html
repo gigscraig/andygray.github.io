@@ -18,7 +18,7 @@
                 <th>L</th>
                 <th>Pts</th>
             </tr>
-            <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw + 1':true">
+            <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw':true">
                 <td>{{ value.name }}</td>
                 <td>{{ value.win }}</td>
                 <td>{{ value.draw }}</td>
@@ -69,12 +69,38 @@
             $scope.golfers = $firebase(golfers_ref);
 
             $scope.generateTable = function() {
-               
-            }
+                var table = {};
+                angular.forEach($scope.golfers, function(value, key) {
+                    if (value.name) {
+                        table[value.name] = {
+                            "name": "" + value.name,
+                            "win": 0,
+                            "lose": 0,
+                            "draw": 0
+                        };
+                    }
+                });
+
+                angular.forEach($scope.fixtures, function(fvalue, fkey) {
+                    if (fvalue.stats) {
+                        angular.forEach(fvalue.stats, function(svalue, skey) {
+                            if (table[svalue.golfer]) {
+                                angular.forEach(["win", "lose", "draw"], function(type) {
+                                    if (svalue[type]) {
+                                        table[svalue.golfer][type] = table[svalue.golfer][type] + svalue[type];
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+
+                $scope.trows = _.values(table);
+            };
 
             $scope.fixtures.$on('loaded', function(data) {
                 console.log(data);
-                // $scope.$apply();
+                // $scope.$apply(); -- doesn't work as expected!!
             });
 
             $scope.$watch('fixtures', function() {
@@ -126,7 +152,7 @@
             $scope.deleteFixture = function(id){
               var itemRef = new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/' + id);
               itemRef.remove();
-            }
+            };
         }
     ]);
     </script>
