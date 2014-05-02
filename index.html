@@ -32,7 +32,8 @@
         <!-- <pre>{{ fixtures }}</pre> -->
         <ul>
             <li ng-cloak ng-repeat="fixture in fixtures">
-                <em>{{fixture.timestamp | date:'mediumDate'}}</em><span class="pull-right">{{fixture.result}}</span>
+                <em>{{fixture.timestamp | date:'mediumDate'}}</em>
+                <span class="pull-right">{{fixture.result}}</span>
             </li>
         </ul>
     </div>
@@ -47,6 +48,7 @@
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
             <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()">
+            <input type="button" class="btn" value="Generate Table" ng-click="generateTable()">
         </form>
     </div>
 
@@ -63,7 +65,7 @@
             $scope.fixtures = $firebase(fixtures_ref);
             $scope.golfers = $firebase(golfers_ref);
 
-            $scope.$watch('fixtures', function() {
+            $scope.generateTable = function() {
                 var table = {};
                 angular.forEach($scope.golfers, function(value, key) {
                     if (value.name) {
@@ -91,7 +93,13 @@
                 });
 
                 $scope.trows = _.values(table);
-            }, true);
+            };    
+
+            $scope.fixtures.$on('loaded', function (data) {
+                console.log(data);
+            });
+
+            $scope.$watch('fixtures', $scope.generateTable, false);
 
             $scope.addFixture = function() {
                 if ($scope.home && $scope.away) {
