@@ -60,6 +60,13 @@
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+
+    <script>
+        angular.element(document).ready(function() {
+          angular.bootstrap(document, ['league']);
+        });
+    </script>
+
     <script type="text/javascript">
     angular.module('league', ['firebase']).controller('LeagueCtrl', ['$scope', '$firebase',
         function($scope, $firebase) {
