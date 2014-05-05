@@ -16,6 +16,7 @@
                 <th>W</th>
                 <th>D</th>
                 <th>L</th>
+                <th>B</th>
                 <th>Pts</th>
             </tr>
             <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw':true">
@@ -23,15 +24,15 @@
                 <td>{{ value.win }}</td>
                 <td>{{ value.draw }}</td>
                 <td>{{ value.lose }}</td>
+                <td>{{ value.bonus }}</td>
                 <td>{{ (value.win * 3) + value.draw }}</td>
             </tr>
         </table>
     </div>
 
     <div class="well col-sm-6 col-sm-offset-3">
-        <!-- <pre>{{ fixtures }}</pre> -->
         <ul>
-            <li ng-cloak ng-repeat="(key, fixture) in fixtures">
+            <li ng-cloak ng-repeat="(key, fixture) in data.fixtures">
                 <em>{{fixture.timestamp | date:'mediumDate'}}</em>
                 <span class="pull-right">
                     {{fixture.result}}
@@ -42,16 +43,15 @@
     </div>
 
     <div class="well col-sm-6 col-sm-offset-3">
-        <!--<pre>{{ golfers }}</pre>-->
         <form name="fixform" class="form-horizontal" novalidate>
             <select class="form-control" name="home" ng-model="home" required>
                 <option value="">Select Golfer</option>
-                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
+                <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
             beat
             <select class="form-control" name="away" ng-model="away" required>
                 <option value="">Select Golfer</option>
-                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
+                <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
             <input type="text" class="form-control" name="result" ng-model="result" placeholder="result" required>
             <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()" ng-disabled="fixform.$invalid">
@@ -73,30 +73,28 @@
     <script type="text/javascript">
     angular.module('league', ['firebase']).controller('LeagueCtrl', ['$scope', '$firebase',
         function($scope, $firebase) {
-            var fixtures_ref = new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/');
-            var golfers_ref = new Firebase('https://shining-fire-8454.firebaseio.com/golfers/');
-
-            $scope.fixtures = $firebase(fixtures_ref);
-            $scope.golfers = $firebase(golfers_ref);
+            var data_ref = new Firebase('https://shining-fire-8454.firebaseio.com/');
+            $scope.data = $firebase(data_ref);
 
             $scope.generateTable = function() {
                 var table = {};
-                angular.forEach($scope.golfers, function(value, key) {
+                angular.forEach($scope.data.golfers, function(value, key) {
                     if (value.name) {
                         table[value.name] = {
                             "name": "" + value.name,
                             "win": 0,
                             "lose": 0,
-                            "draw": 0
+                            "draw": 0,
+                            "bonus": 0,
                         };
                     }
                 });
 
-                angular.forEach($scope.fixtures, function(fvalue, fkey) {
+                angular.forEach($scope.data.fixtures, function(fvalue, fkey) {
                     if (fvalue.stats) {
                         angular.forEach(fvalue.stats, function(svalue, skey) {
                             if (table[svalue.golfer]) {
-                                angular.forEach(["win", "lose", "draw"], function(type) {
+                                angular.forEach(["win", "lose", "draw", "bonus"], function(type) {
                                     if (svalue[type]) {
                                         table[svalue.golfer][type] = table[svalue.golfer][type] + svalue[type];
                                     }
@@ -109,17 +107,15 @@
                 $scope.trows = _.values(table);
             };
 
-            $scope.fixtures.$on('loaded', function(data) {
-                console.log(data);
-                //$scope.generateTable(); //-- doesn't work as expected!!
-                //$scope.$apply(); //-- doesn't work as expected!!
+            $scope.data.$on('loaded', function(data) {
+                $scope.generateTable();
             });
 
-            $scope.$watch('fixtures', $scope.generateTable, true);
+            $scope.$watch('data', $scope.generateTable, true);
 
             $scope.addFixture = function() {
                 if ($scope.home && $scope.away) {
-                    fixtures_ref.push({
+                    new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/').push({
                         "timestamp": new Date().getTime(),
                         "result": $scope.home + " beat " + $scope.away + " " + $scope.result,
                         "stats": [{
@@ -133,9 +129,8 @@
                 }
             };
 
-            $scope.deleteFixture = function(id){
-              var itemRef = new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/' + id);
-              itemRef.remove();
+            $scope.deleteFixture = function(id) {
+              new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/' + id).remove();
             };
         }
     ]);
