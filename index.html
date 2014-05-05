@@ -42,15 +42,18 @@
     </div>
 
     <div class="well col-sm-6 col-sm-offset-3">
+        <!--<pre>{{ golfers }}</pre>-->
         <form name="fixform" class="form-horizontal" novalidate>
             <select class="form-control" name="home" ng-model="home" required>
+                <option value="">Select Golfer</option>
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
             beat
             <select class="form-control" name="away" ng-model="away" required>
+                <option value="">Select Golfer</option>
                 <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
-            <input type="text" class="form-control" name="result" ng-model="result" placeholder="result">
+            <input type="text" class="form-control" name="result" ng-model="result" placeholder="result" required>
             <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()" ng-disabled="fixform.$invalid">
             <input type="button" class="btn" value="Generate Table" ng-click="generateTable()">
         </form>
@@ -108,8 +111,8 @@
 
             $scope.fixtures.$on('loaded', function(data) {
                 console.log(data);
-                // $scope.generateTable(); -- doesn't work as expected!!
-                // $scope.$apply(); -- doesn't work as expected!!
+                //$scope.generateTable(); //-- doesn't work as expected!!
+                //$scope.$apply(); //-- doesn't work as expected!!
             });
 
             $scope.$watch('fixtures', $scope.generateTable, true);
