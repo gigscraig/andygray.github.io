@@ -42,7 +42,7 @@
     </div>
 
     <div class="well col-sm-6 col-sm-offset-3">
-        <form name="fixform" class="form-horizontal" novalidate>
+        <form name="fixform" class="form-horizontal" novalidate ng-submit="addFixture()">
             <select class="form-control" name="home" ng-model="home" required>
                 <option value="">-- Select Golfer --</option>
                 <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
@@ -55,11 +55,12 @@
             Result:
             <select class="form-control" name="result" ng-model="result" required>
                 <option value="">-- Select Result --</option>
-                <option value="2and1">2&amp;1</option>
-                <option value="as">All Square</option>
-                <option value="5and4">5&amp;4</option>
+                <option value="2 and 1">2 and 1</option>
+                <option value="3 and 2">3 and 2</option>
+                <option value="All Square">All Square</option>
+                <option value="5 and 4">5 and 4</option>
             </select>
-            <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()" ng-disabled="fixform.$invalid">
+            <input type="submit" class="btn btn-success" value="Add Result" ng-disabled="fixform.$invalid">
         </form>
     </div>
 
@@ -69,15 +70,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 
     <script>
-    angular.element(document).ready(function() {
-        angular.bootstrap(document, ['league']);
-    });
+    // angular.element(document).ready(function() {
+    //     angular.bootstrap(document, ['league']);
+    // });
     </script>
 
     <script type="text/javascript">
     angular.module('league', ['firebase']).controller('LeagueCtrl', ['$scope', '$firebase',
         function($scope, $firebase) {
-            var data_ref = new Firebase('https://shining-fire-8454.firebaseio.com/');
+            var FB_ROOT = 'https://shining-fire-8454.firebaseio.com';
+            var data_ref = new Firebase(FB_ROOT);
             $scope.data = $firebase(data_ref);
 
             $scope.generateTable = function() {
@@ -114,11 +116,12 @@
             $scope.$watch('data', $scope.generateTable, true);
 
             $scope.addFixture = function() {
+                console.log("AF")
                 if ($scope.home && $scope.away) {
                     if ($scope.result == 'as') {
-                        new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/').push({
+                        new Firebase(FB_ROOT + '/fixtures/').push({
                             timestamp: new Date().getTime(),
-                            result: $scope.home + " drew with " + $scope.away + " all square",
+                            result: $scope.home + " drew with " + $scope.away + " " + $scope.result,
                             stats: [{
                                 golfer: "" + $scope.home,
                                 draw: 1
@@ -130,7 +133,23 @@
                         return;
                     }
 
-                    new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/').push({
+                    if ($scope.result == '5 and 4') {
+                        new Firebase(FB_ROOT + '/fixtures/').push({
+                            timestamp: new Date().getTime(),
+                            result: $scope.home + " hammered " + $scope.away + " " + $scope.result,
+                            stats: [{
+                                golfer: "" + $scope.home,
+                                win: 1,
+                                bonus: 1
+                            }, {
+                                golfer: "" + $scope.away,
+                                lose: 1
+                            }]
+                        });
+                        return;
+                    }
+
+                    new Firebase(FB_ROOT + '/fixtures/').push({
                         timestamp: new Date().getTime(),
                         result: $scope.home + " beat " + $scope.away + " " + $scope.result,
                         stats: [{
@@ -145,7 +164,7 @@
             };
 
             $scope.deleteFixture = function(id) {
-                new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/' + id).remove();
+                new Firebase(FB_ROOT + '/fixtures/' + id).remove();
             };
         }
     ]);
