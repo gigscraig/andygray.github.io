@@ -9,7 +9,6 @@
 <body ng-app="league" ng-controller="LeagueCtrl">
 
     <div class="well col-sm-6 col col-sm-offset-3">
-        <!--<pre>{{ table }}</pre>-->
         <table class="table table-striped">
             <tr>
                 <th>Golfer</th>
@@ -45,17 +44,22 @@
     <div class="well col-sm-6 col-sm-offset-3">
         <form name="fixform" class="form-horizontal" novalidate>
             <select class="form-control" name="home" ng-model="home" required>
-                <option value="">Select Golfer</option>
+                <option value="">-- Select Golfer --</option>
                 <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
-            beat
+            Vs.
             <select class="form-control" name="away" ng-model="away" required>
-                <option value="">Select Golfer</option>
+                <option value="">-- Select Golfer --</option>
                 <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
             </select>
-            <input type="text" class="form-control" name="result" ng-model="result" placeholder="result" required>
+            Result:
+            <select class="form-control" name="result" ng-model="result" required>
+                <option value="">-- Select Result --</option>
+                <option value="2and1">2&amp;1</option>
+                <option value="as">All Square</option>
+                <option value="5and4">5&amp;4</option>
+            </select>
             <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()" ng-disabled="fixform.$invalid">
-            <input type="button" class="btn" value="Generate Table" ng-click="generateTable()">
         </form>
     </div>
 
@@ -65,9 +69,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 
     <script>
-        angular.element(document).ready(function() {
-          angular.bootstrap(document, ['league']);
-        });
+    angular.element(document).ready(function() {
+        angular.bootstrap(document, ['league']);
+    });
     </script>
 
     <script type="text/javascript">
@@ -81,11 +85,11 @@
                 angular.forEach($scope.data.golfers, function(value, key) {
                     if (value.name) {
                         table[value.name] = {
-                            "name": "" + value.name,
-                            "win": 0,
-                            "lose": 0,
-                            "draw": 0,
-                            "bonus": 0,
+                            name: "" + value.name,
+                            win: 0,
+                            lose: 0,
+                            draw: 0,
+                            bonus: 0,
                         };
                     }
                 });
@@ -107,30 +111,41 @@
                 $scope.trows = _.values(table);
             };
 
-            $scope.data.$on('loaded', function(data) {
-                $scope.generateTable();
-            });
-
             $scope.$watch('data', $scope.generateTable, true);
 
             $scope.addFixture = function() {
                 if ($scope.home && $scope.away) {
+                    if ($scope.result == 'as') {
+                        new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/').push({
+                            timestamp: new Date().getTime(),
+                            result: $scope.home + " drew with " + $scope.away + " all square",
+                            stats: [{
+                                golfer: "" + $scope.home,
+                                draw: 1
+                            }, {
+                                golfer: "" + $scope.away,
+                                draw: 1
+                            }]
+                        });
+                        return;
+                    }
+
                     new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/').push({
-                        "timestamp": new Date().getTime(),
-                        "result": $scope.home + " beat " + $scope.away + " " + $scope.result,
-                        "stats": [{
-                            "golfer": "" + $scope.home,
-                            "win": 1
+                        timestamp: new Date().getTime(),
+                        result: $scope.home + " beat " + $scope.away + " " + $scope.result,
+                        stats: [{
+                            golfer: "" + $scope.home,
+                            win: 1
                         }, {
-                            "golfer": "" + $scope.away,
-                            "lose": 1
+                            golfer: "" + $scope.away,
+                            lose: 1
                         }]
                     });
                 }
             };
 
             $scope.deleteFixture = function(id) {
-              new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/' + id).remove();
+                new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/' + id).remove();
             };
         }
     ]);
