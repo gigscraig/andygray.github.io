@@ -18,13 +18,13 @@
                 <th>B</th>
                 <th>Pts</th>
             </tr>
-            <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw':true">
+            <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw + bonus':true">
                 <td>{{ value.name }}</td>
                 <td>{{ value.win }}</td>
                 <td>{{ value.draw }}</td>
                 <td>{{ value.lose }}</td>
                 <td>{{ value.bonus }}</td>
-                <td>{{ (value.win * 3) + value.draw }}</td>
+                <td>{{ (value.win * 3) + value.draw + value.bonus }}</td>
             </tr>
         </table>
     </div>
