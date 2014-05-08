@@ -127,7 +127,7 @@
             $scope.addFixture = function() {
                 console.log("AF")
                 if ($scope.home && $scope.away) {
-                    if ($scope.result == 'as') {
+                    if ($scope.result == 'All Square') {
                         new Firebase(FB_ROOT + '/fixtures/').push({
                             timestamp: new Date().getTime(),
                             result: $scope.home + " drew with " + $scope.away + " " + $scope.result,
