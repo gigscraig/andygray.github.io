@@ -9,59 +9,68 @@
 <body ng-app="league" ng-controller="LeagueCtrl">
 
     <div class="well col-sm-6 col col-sm-offset-3">
-        <table class="table table-striped">
-            <tr>
-                <th>Golfer</th>
-                <th>W</th>
-                <th>D</th>
-                <th>L</th>
-                <th>B</th>
-                <th>Pts</th>
-            </tr>
-            <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw + bonus':true">
-                <td>{{ value.name }}</td>
-                <td>{{ value.win }}</td>
-                <td>{{ value.draw }}</td>
-                <td>{{ value.lose }}</td>
-                <td>{{ value.bonus }}</td>
-                <td>{{ (value.win * 3) + value.draw + value.bonus }}</td>
-            </tr>
-        </table>
+        <input type="button" class="btn" value="Table" ng-click="showFixtures = false"/>
+        <input type="button" class="btn" value="Fixture" ng-click="showFixtures = true"/>
     </div>
 
-    <div class="well col-sm-6 col-sm-offset-3">
-        <ul>
-            <li ng-cloak ng-repeat="(key, fixture) in data.fixtures">
-                <em>{{fixture.timestamp | date:'mediumDate'}}</em>
-                <span class="pull-right">
-                    {{fixture.result}}
-                    <a href="" ng-click="deleteFixture(key)">X</a>
-                </span>
-            </li>
-        </ul>
+    <div ng-hide="showFixtures">
+        <div class="well col-sm-6 col col-sm-offset-3">
+            <table class="table table-striped">
+                <tr>
+                    <th>Golfer</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>B</th>
+                    <th>Pts</th>
+                </tr>
+                <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw + bonus':true">
+                    <td>{{ value.name }}</td>
+                    <td>{{ value.win }}</td>
+                    <td>{{ value.draw }}</td>
+                    <td>{{ value.lose }}</td>
+                    <td>{{ value.bonus }}</td>
+                    <td>{{ (value.win * 3) + value.draw + value.bonus }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    <div class="well col-sm-6 col-sm-offset-3">
-        <form name="fixform" class="form-horizontal" novalidate ng-submit="addFixture()">
-            <select class="form-control" name="home" ng-model="home" required>
-                <option value="">-- Select Golfer --</option>
-                <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
-            </select>
-            Vs.
-            <select class="form-control" name="away" ng-model="away" required>
-                <option value="">-- Select Golfer --</option>
-                <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
-            </select>
-            Result:
-            <select class="form-control" name="result" ng-model="result" required>
-                <option value="">-- Select Result --</option>
-                <option value="2 and 1">2 and 1</option>
-                <option value="3 and 2">3 and 2</option>
-                <option value="All Square">All Square</option>
-                <option value="5 and 4">5 and 4</option>
-            </select>
-            <input type="submit" class="btn btn-success" value="Add Result" ng-disabled="fixform.$invalid">
-        </form>
+    <div ng-show="showFixtures">
+        <div class="well col-sm-6 col-sm-offset-3">
+            <form name="fixform" class="form-horizontal" novalidate ng-submit="addFixture()">
+                <select class="form-control" name="home" ng-model="home" required>
+                    <option value="">-- Select Golfer --</option>
+                    <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
+                </select>
+                Vs.
+                <select class="form-control" name="away" ng-model="away" required>
+                    <option value="">-- Select Golfer --</option>
+                    <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
+                </select>
+                Result:
+                <select class="form-control" name="result" ng-model="result" required>
+                    <option value="">-- Select Result --</option>
+                    <option value="2 and 1">2 and 1</option>
+                    <option value="3 and 2">3 and 2</option>
+                    <option value="All Square">All Square</option>
+                    <option value="5 and 4">5 and 4</option>
+                </select>
+                <input type="submit" class="btn btn-success" value="Add Result" ng-disabled="fixform.$invalid">
+            </form>
+        </div>
+
+        <div class="well col-sm-6 col-sm-offset-3">
+            <ul>
+                <li ng-cloak ng-repeat="(key, fixture) in data.fixtures">
+                    <em>{{fixture.timestamp | date:'mediumDate'}}</em>
+                    <span class="pull-right">
+                        {{fixture.result}}
+                        <a href="" ng-click="deleteFixture(key)">X</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
@@ -69,18 +78,13 @@
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 
-    <script>
-    // angular.element(document).ready(function() {
-    //     angular.bootstrap(document, ['league']);
-    // });
-    </script>
-
     <script type="text/javascript">
     angular.module('league', ['firebase']).controller('LeagueCtrl', ['$scope', '$firebase',
         function($scope, $firebase) {
             var FB_ROOT = 'https://shining-fire-8454.firebaseio.com';
             var data_ref = new Firebase(FB_ROOT);
             $scope.data = $firebase(data_ref);
+            $scope.showFixtures = true;
 
             $scope.generateTable = function() {
                 var table = {};
