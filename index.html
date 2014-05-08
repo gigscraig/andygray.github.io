@@ -25,7 +25,10 @@
                     <th>Pts</th>
                 </tr>
                 <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw + bonus':true">
-                    <td>{{ value.name }}</td>
+                    <td>
+                        <img src="http://graph.facebook.com/{{value.facebook}}/picture" alt="{{ value.name }}" class="img-circle"> 
+                        {{ value.name }}
+                    </td>
                     <td>{{ value.win }}</td>
                     <td>{{ value.draw }}</td>
                     <td>{{ value.lose }}</td>
@@ -92,6 +95,8 @@
                     if (value.name) {
                         table[value.name] = {
                             name: "" + value.name,
+                            facebook: "" + value.facebook,
+                            twitter: "" + value.twitter,
                             win: 0,
                             lose: 0,
                             draw: 0,
