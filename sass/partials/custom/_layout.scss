@@ -1,0 +1,267 @@
+$base-color: #3A9F2C;
+
+
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+clear:both;}
+
+
+body{
+	background: $base-color;
+	font-family: "Helvetica Neue";
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.2);
+
+#wrapper{
+	padding:10px;
+	border-top:1px solid rgba(255,255,255,0.1);
+}
+
+.box{
+	background: rgba(255,255,255,0.1);
+	border: 1px solid rgba(0,0,0,0.25);
+	padding:10px;
+	width:100%;
+	@extend %radius;
+	margin-bottom:10px;
+	color: rgba(255,255,255,0.8);
+	
+}
+
+	#headerBar{
+		width:100%;
+		background: rgba(0,0,0,0.1);
+		height:49px;
+		border-bottom: 1px solid darken( $base-color, 20% );
+		padding:10px;
+		border-bottom: 1px solid rgba(0,0,0,0.15);
+	
+		h1{	
+			display:inline-block;
+			color: rgba(255,255,255,0.8);
+			line-height:30px;
+			font-size:18px;
+			font-weight: bold;
+		}
+	
+		ul{
+			display:inline-block;
+			float:right;
+			margin:0;
+			padding:0;
+		}
+	
+		li{
+			text-decoration: none;
+			width:80px;
+			display: inline-block;
+			line-height: 30px;
+			background: rgba(0,0,0,0.1);
+			text-align:center;
+			@extend %radius;
+			color: rgba(255,255,255,0.6);
+			font-size:14px;
+		
+			&.selected{
+				color:#eee !important;
+				background: rgba(0,0,0,0.15) !important;
+			}
+		}
+	
+	}
+
+	table{
+		color: rgba(255,255,255,0.8);
+		@extend %radiustop;
+		border: 1px solid rgba(0,0,0,0.25);
+		width:100%;
+		background: rgba(255,255,255,0.1);
+		
+		th{
+			
+			font-size:15px;
+			height:43px;
+			border-bottom: 1px solid rgba(0,0,0,0.06);
+
+			
+			&.golfer{
+				width:50%;
+				padding-left:5px;
+			}
+			
+			&.win, &.draw, &.lost, &.pts, &.bonus{
+				width:10%;
+				text-align: center;
+			}
+			
+		}
+		
+		
+		td{
+			/* background: rgba(255,255,255,0.055); */
+			height:43px;
+			
+			&.golfer{
+				width:50%;
+				padding-left:5px;
+				
+			}
+			
+			&.win, &.draw, &.lost, &.pts, &.bonus{
+				width:10%;
+				text-align:center;
+			}
+			
+		}
+		
+		tr{
+			width:100%;
+			border-bottom: 1px solid rgba(0,0,0,0.05);
+			
+			
+			&:last-child{
+			
+				height:43px;
+				border: 1px solid rgba(0,0,0,0.25);
+				-webkit-border-bottom-right-radius: 3px;
+				-webkit-border-bottom-left-radius: 3px;
+				-moz-border-radius-bottomright: 3px;
+				-moz-border-radius-bottomleft: 3px;
+				border-bottom-right-radius: 3px;
+				border-bottom-left-radius: 3px;
+			}
+			
+			&:first-child{
+				@extend %radiustop;
+				
+			}
+			
+		}
+		
+
+	}
+	#selections{
+			width:100%;
+			display: table;
+			color:#fff !important;
+		
+		.form-control{
+			color:#fff !important;
+			text-align:center;
+		}
+			
+		.versus{
+			display:table-cell;
+			width:6%;
+			text-align: center;
+		}	
+	
+		select{
+			width:100%;
+			display: table-cell;
+			background: rgba(255,255,255,0.15) !important;
+			-webkit-appearance: none;
+			 height:42px;
+			 font-size:15px;
+			 padding-left:10px;
+			 color: rgba (255,255,255,0.7) !important;
+			 border: 1px solid rgba(0,0,0,0.25);
+			 background: url('../images/dropDownArrow.png') no-repeat right center !important;
+			
+		
+		
+		
+		}
+		
+		
+		
+
+	}
+	
+	input[value='Add Result'] {
+		  border: 1px solid darken($base-color, 10%);
+		  -webkit-appearance: none;
+		  background: rgba(0,0,0,0.15);
+		  border: 1px solid rgba(0,0,0,0.25);  cursor:pointer;
+		  color:lighten($base-color,50%);
+		  font-size:1em;
+		  width:100%;
+		  float:left;
+		  height:42px;
+		  @extend %radius;
+		
+		}
+		input[value='Add Result']:hover {background-color:darken($base-color,3%);}	
+	ul#scores{
+		margin-top:10px;
+		margin-bottom: 10px;
+		display: table;
+		width:100%;
+		border: 1px solid rgba(0,0,0,0.25);
+		@extend %radius;
+	/* 	background: rgba(255,255,255,0.08); */
+		padding:0;
+	}
+	
+	li.scorebutton{
+		width:20%;
+		height:42px;
+		margin:0px;
+		display: inline-block;
+		vertical-align: middle;
+		text-align:center;
+		color: rgba(255,255,255,0.8);
+		font-size:13px;
+		line-height:42px;
+		padding:0;
+		
+		&.selected{
+				color:#fff !important;
+				background: rgba(0,0,0,0.15) !important;
+			}
+		
+		&:hover{
+			background: rgba(0,0,0,0.1) !important;
+			color:#FFF;
+		}
+		
+		&:nth-child(-n+5) {
+	    border-bottom: 1px solid rgba(0,0,0,0.15);   
+		}
+	
+		&:nth-child(-n+4) {
+	    border-right: 1px solid rgba(0,0,0,0.15);   
+		}
+		
+		&:nth-child(n+6) {
+	    border-right: 1px solid rgba(0,0,0,0.15);   
+		}
+		
+		&:last-child{
+			margin-right:0px;
+			border-right:none;
+			
+		}
+		
+		&:first-child{
+			margin-left:0px;
+			
+			
+		}
+		
+		
+		}
+	
+		em{
+		display:inline-block;
+		color:rgba(255,255,255,0.5);
+		height:29px;
+
+		}
+	
+		.delete{
+			float:right;
+			color:rgba(255,255,255,0.5);
+		}
+	
+}
+

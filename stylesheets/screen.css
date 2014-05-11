@@ -1,0 +1,274 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 17, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+/* line 22, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1; }
+
+/* line 24, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none; }
+
+/* line 26, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/* line 28, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+/* line 30, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none; }
+  /* line 103, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+/* line 32, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none; }
+
+/* line 116, ../../../../../Library/Ruby/Gems/2.0.0/gems/compass-0.12.4/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block; }
+
+/* line 5, ../sass/partials/custom/_layout.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  clear: both; }
+
+/* line 9, ../sass/partials/custom/_layout.scss */
+body {
+  background: #3a9f2c;
+  font-family: "Helvetica Neue";
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2); }
+  /* line 14, ../sass/partials/custom/_layout.scss */
+  body #wrapper {
+    padding: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); }
+  /* line 19, ../sass/partials/custom/_layout.scss */
+  body .box {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8); }
+  /* line 30, ../sass/partials/custom/_layout.scss */
+  body #headerBar {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    height: 49px;
+    border-bottom: 1px solid #1d4f16;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
+    /* line 38, ../sass/partials/custom/_layout.scss */
+    body #headerBar h1 {
+      display: inline-block;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 30px;
+      font-size: 18px;
+      font-weight: bold; }
+    /* line 46, ../sass/partials/custom/_layout.scss */
+    body #headerBar ul {
+      display: inline-block;
+      float: right;
+      margin: 0;
+      padding: 0; }
+    /* line 53, ../sass/partials/custom/_layout.scss */
+    body #headerBar li {
+      text-decoration: none;
+      width: 80px;
+      display: inline-block;
+      line-height: 30px;
+      background: rgba(0, 0, 0, 0.1);
+      text-align: center;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px; }
+      /* line 64, ../sass/partials/custom/_layout.scss */
+      body #headerBar li.selected {
+        color: #eee !important;
+        background: rgba(0, 0, 0, 0.15) !important; }
+  /* line 72, ../sass/partials/custom/_layout.scss */
+  body table {
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1); }
+    /* line 79, ../sass/partials/custom/_layout.scss */
+    body table th {
+      font-size: 15px;
+      height: 43px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06); }
+      /* line 86, ../sass/partials/custom/_layout.scss */
+      body table th.golfer {
+        width: 50%;
+        padding-left: 5px; }
+      /* line 91, ../sass/partials/custom/_layout.scss */
+      body table th.win, body table th.draw, body table th.lost, body table th.pts, body table th.bonus {
+        width: 10%;
+        text-align: center; }
+    /* line 99, ../sass/partials/custom/_layout.scss */
+    body table td {
+      /* background: rgba(255,255,255,0.055); */
+      height: 43px; }
+      /* line 103, ../sass/partials/custom/_layout.scss */
+      body table td.golfer {
+        width: 50%;
+        padding-left: 5px; }
+      /* line 109, ../sass/partials/custom/_layout.scss */
+      body table td.win, body table td.draw, body table td.lost, body table td.pts, body table td.bonus {
+        width: 10%;
+        text-align: center; }
+    /* line 116, ../sass/partials/custom/_layout.scss */
+    body table tr {
+      width: 100%;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+      /* line 121, ../sass/partials/custom/_layout.scss */
+      body table tr:last-child {
+        height: 43px;
+        border: 1px solid rgba(0, 0, 0, 0.25);
+        -webkit-border-bottom-right-radius: 3px;
+        -webkit-border-bottom-left-radius: 3px;
+        -moz-border-radius-bottomright: 3px;
+        -moz-border-radius-bottomleft: 3px;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px; }
+  /* line 142, ../sass/partials/custom/_layout.scss */
+  body #selections {
+    width: 100%;
+    display: table;
+    color: #fff !important; }
+    /* line 147, ../sass/partials/custom/_layout.scss */
+    body #selections .form-control {
+      color: #fff !important;
+      text-align: center; }
+    /* line 152, ../sass/partials/custom/_layout.scss */
+    body #selections .versus {
+      display: table-cell;
+      width: 6%;
+      text-align: center; }
+    /* line 158, ../sass/partials/custom/_layout.scss */
+    body #selections select {
+      width: 100%;
+      display: table-cell;
+      background: rgba(255, 255, 255, 0.15) !important;
+      -webkit-appearance: none;
+      height: 42px;
+      font-size: 15px;
+      padding-left: 10px;
+      color: rgba 255, 255, 255, 0.7 !important;
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      background: url("../images/dropDownArrow.png") no-repeat right center !important; }
+  /* line 180, ../sass/partials/custom/_layout.scss */
+  body input[value='Add Result'] {
+    border: 1px solid #2b7721;
+    -webkit-appearance: none;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    color: #daf4d6;
+    font-size: 1em;
+    width: 100%;
+    float: left;
+    height: 42px; }
+  /* line 193, ../sass/partials/custom/_layout.scss */
+  body input[value='Add Result']:hover {
+    background-color: #369329; }
+  /* line 194, ../sass/partials/custom/_layout.scss */
+  body ul#scores {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: table;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    /* 	background: rgba(255,255,255,0.08); */
+    padding: 0; }
+  /* line 205, ../sass/partials/custom/_layout.scss */
+  body li.scorebutton {
+    width: 20%;
+    height: 42px;
+    margin: 0px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    line-height: 42px;
+    padding: 0; }
+    /* line 217, ../sass/partials/custom/_layout.scss */
+    body li.scorebutton.selected {
+      color: #fff !important;
+      background: rgba(0, 0, 0, 0.15) !important; }
+    /* line 222, ../sass/partials/custom/_layout.scss */
+    body li.scorebutton:hover {
+      background: rgba(0, 0, 0, 0.1) !important;
+      color: #FFF; }
+    /* line 227, ../sass/partials/custom/_layout.scss */
+    body li.scorebutton:nth-child(-n+5) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
+    /* line 231, ../sass/partials/custom/_layout.scss */
+    body li.scorebutton:nth-child(-n+4) {
+      border-right: 1px solid rgba(0, 0, 0, 0.15); }
+    /* line 235, ../sass/partials/custom/_layout.scss */
+    body li.scorebutton:nth-child(n+6) {
+      border-right: 1px solid rgba(0, 0, 0, 0.15); }
+    /* line 239, ../sass/partials/custom/_layout.scss */
+    body li.scorebutton:last-child {
+      margin-right: 0px;
+      border-right: none; }
+    /* line 245, ../sass/partials/custom/_layout.scss */
+    body li.scorebutton:first-child {
+      margin-left: 0px; }
+  /* line 254, ../sass/partials/custom/_layout.scss */
+  body em {
+    display: inline-block;
+    color: rgba(255, 255, 255, 0.5);
+    height: 29px; }
+  /* line 261, ../sass/partials/custom/_layout.scss */
+  body .delete {
+    float: right;
+    color: rgba(255, 255, 255, 0.5); }
+
+/* line 1, ../sass/partials/custom/_placeholders.scss */
+body .box, body #headerBar li, body input[value='Add Result'], body ul#scores {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
+
+/* line 7, ../sass/partials/custom/_placeholders.scss */
+body table, body table tr:first-child {
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px; }

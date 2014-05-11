@@ -1,0 +1,163 @@
+$text: lighten($base-color,35%);
+
+form { 
+  font-size:1.2em; 
+  margin: 10px auto; 
+  padding:10px;
+  width:100%;
+  @extend %radius;
+  float:left;
+}
+
+input, select, textarea {outline:none;}
+label {padding:0 .5em 0 .5em;}
+
+
+/* Text Input */
+input[type='text'] {
+  @extend %radius;
+  background-color: darken($base-color, 5%);
+  color: lighten($text, 10%);
+  font-size:2em;
+  margin:.2em 0 1em;
+  padding: .25em;
+  width:100%;
+}
+
+::-webkit-input-placeholder {color: lighten($base-color, 10%);}
+:-moz-placeholder {color: lighten($base-color, 10%);} /* FF 18 */
+::-moz-placeholder {color: lighten($base-color, 10%);} /* FF 19+ */
+:-ms-input-placeholder {color: lighten($base-color, 10%);}
+
+
+/* Radio Buttons */
+fieldset {
+  margin-bottom:10px 0;
+}
+
+
+input[type='radio'] {
+  appearance:button;
+  border: solid .1em lighten($base-color,7%);;
+  background-color:darken($base-color, 5%);
+  color:#f0f;
+  cursor:pointer;
+  height:2.5em;
+  width: 2.5em;
+  margin-top:0;
+  vertical-align:text-top;
+}
+
+input[type="radio"]:checked:after {
+  background-color:lighten($base-color,15%);
+  border-radius:50%;
+  content:"\00a0";
+  display:block;
+  position:relative;
+  height:1.5em;
+  width:1.5em;
+  margin:.4em;
+}
+
+
+/* Dropdown Box */
+.styled-select {
+  display:inline-block;
+  background-color: lighten($base-color, 5%);
+  color: darken($base-color, 10%);
+  cursor:pointer;
+  font-size:1.1em;
+  margin-bottom:1.5em;
+  padding:.25em 0;
+  position:relative;
+  width:50%;
+}
+
+.styled-select:before {
+  border: solid 1px darken($base-color,10%);
+  border-width: 0 0 0 1px;
+  content:'\f103';
+  color:darken($base-color,15%);
+  font-size:1.25em;
+  padding-left:.25em;
+  position:absolute;
+  pointer-events:none;
+  right:.35em;
+}
+
+select {
+    background-color: $base-color;
+    border:none;
+    cursor:pointer;
+    color: darken($base-color, 40%);
+    display:inline-block;
+    font-size:1em;
+    width:40%;
+    
+}
+
+/* Text Area */
+textarea {
+  background-color: darken($base-color, 5%);
+  color: lighten($text, 10%);
+  font-size:1em;
+  height:10em;
+  margin:.5em 0 1em;
+  padding:1em;
+  width:100%;
+}
+
+/* Checkbox */
+input[type='checkbox'] {
+  appearance:none;
+  @extend %radius;
+  background-color:darken($base-color, 5%);
+  cursor:pointer;
+  font-size:1em;
+  padding: .25em;
+  height:1em; width:1em;
+  vertical-align:text-top;
+}
+
+input[type='checkbox']:checked:after {
+  border:solid $text;
+  border-width:0 4px 4px 0;
+  content:"\00a0";
+  display:block;
+  height:1em; width:.5em;
+  margin-top:-.9em;
+  position:relative;
+  transform:rotate(45deg); 
+}
+
+
+/* Submit Button */
+input[type='submit'] {
+  border: 1px solid darken($base-color, 10%);
+  background-color:lighten($base-color, 5%);
+  cursor:pointer;
+  color:lighten($base-color,50%);
+  float:right;
+  font-size:1.5em;
+  padding: .25em 1em;
+  width:100%;
+  float:left;
+  @extend %radius;
+
+}
+input[type='submit']:hover {background-color:darken($base-color,5%);}
+
+
+ul#scores{
+	width:100%;
+}
+
+.scorebutton{
+	width:24.3%;
+	height:50px;
+	background: black;
+	display:inline-block;
+	margin-bottom:6px;
+	@extend %radius;
+}
+
