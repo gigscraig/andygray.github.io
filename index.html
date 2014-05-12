@@ -1,162 +1,130 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="stylesheets/screen.css">
     <title>Summer League</title>
-    <link href="stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> 
-    <script src="http://code.jquery.com/jquery-latest.min.js"
-        type="text/javascript"></script>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-
-<script>
-$( document ).ready(function() {
-    $('#leagueTable').hide();
-    
-    $( ".table" ).click(function() {
-	$( "#leagueTable" ).fadeIn('fast');
-	$( "#results" ).fadeOut('fast');
-	$('li.table').addClass('selected');
-	$('li.table').siblings().removeClass('selected');
-	});
-    
-    $( ".results" ).click(function() {
-	$( "#results" ).fadeIn('fast');
-	$( "#leagueTable").fadeOut('fast');
-	$('li.results').addClass('selected');
-	$('li.results').siblings().removeClass('selected');
-	});
-
-	$("ul#scores li").click(function() {
-	$(this).addClass('selected');
-	$(this).siblings().removeClass('selected');
-	});
-});
-</script>
-
-
 </head>
 
 <body ng-app="league" ng-controller="LeagueCtrl">
-
-
-		<div id="headerBar">
+    
+    
+    		<div id="headerBar">
 			<h1>CGCSL</h1>
-	
+			
 			<ul>
-				<li class="table">Table</li>
-				<li class=" results selected">Results</li>
+				<li class="table" value="Table" ng-click="showFixtures = false">Table</li>
+				<li class=" results" value="Fixture" ng-click="showFixtures = true">Results</li>
 			</ul>
 			
 		</div>
-		
-		<div id="wrapper">
-	
-		<div id="leagueTable">
-		    <div class="well col-sm-6 col col-sm-offset-3">
-		        <!--<pre>{{ table }}</pre>-->
-		        <table>
-		            <tr>
-		                <th class="golfer">Golfer</th>
-		                <th class="win">W</th>
-		                <th class="draw">D</th>
-		                <th class="lost">L</th>
-		                <th class="bonus">B</th>
-		                <th class="pts">Pts</th>
-		            </tr>
-		            <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw':true">
-		                <td class="golfer">{{ value.name }}</td>
-		                <td class="win">{{ value.win }}</td>
-		                <td class="draw">{{ value.draw }}</td>
-		                <td class="lost">{{ value.lose }}</td>
-		                <td class="bonus">{{ value.bonus }}</td>
-		                <td class="pts">{{ (value.win * 3) + value.draw }}</td>
-		            </tr>
-		        </table>
-		    </div>
-		</div>
-	    
-		<div id="results">
-		    	
-		    
-		        <form name="fixform" class="form-horizontal box" novalidate>
-		        
-		        	<div id="selections">
-			            <select class="form-control" name="home" ng-model="home" required>
-			                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
-			            </select>
-			            <span class="versus">v</span>
-			            <select class="form-control" name="away" ng-model="away" required>
-			                <option ng-repeat="golfer in golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
-			            </select>
-			       </div>
-		           <!--
- <input type="text" class="form-control" name="result" ng-model="result" placeholder="result">-->
-		            <ul id="scores">
+    
+    <div id="wrapper">
 
-						<li class="scorebutton">5/4</li>
-						<li class="scorebutton">5/3</li>
-						<li class="scorebutton">4/3</li>
-						<li class="scorebutton">4/2</li>
-						<li class="scorebutton">3/2</li>
-						<li class="scorebutton">3/1</li>
-						<li class="scorebutton">2/1</li>
-						<li class="scorebutton">2up</li>
-						<li class="scorebutton">1up</li>
-						<li class="scorebutton">Draw</li>	
-					</ul>
-		            <input type="button" class="btn btn-success" value="Add Result" ng-click="addFixture()" ng-disabled="fixform.$invalid">
-		            <input type="button" class="btn" value="Generate Table" ng-click="generateTable()">
-		        </form>
-		
-		    
-		    <div class="box">
-		        <!-- <pre>{{ fixtures }}</pre> -->
-		        <ul>
-		            <li ng-cloak ng-repeat="(key, fixture) in fixtures">
-		                <em>{{fixture.timestamp | date:'mediumDate'}}</em>
-		                <span class="pull-right">
-		                    {{fixture.result}}
-		                    <a href="" ng-click="deleteFixture(key)"><span class="delete">X</span></a>
-		                </span>
-		            </li>
-		        </ul>
-		    </div>
+	    <div ng-hide="showFixtures">
+	        <div class="well col-sm-6 col col-sm-offset-3">
+	            <table class="table table-striped">
+	                <tr>
+	                    <th class="golfer">Player</th>
+	                    <th class="win">W</th>
+	                    <th class="draw">D</th>
+	                    <th class="lost">L</th>
+	                    <th class="bonus">B</th>
+	                    <th class="pts">Pts</th>
+	                </tr>
+	                <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw + bonus':true">
+	                    <td class="golfer">
+	                        <img src="http://graph.facebook.com/{{value.facebook}}/picture" alt="{{ value.name }}" class="img-circle"> 
+	                     <span class="player">{{ value.name }}</span>
+	                    </td>
+	                    <td class="win">{{ value.win }}</td>
+	                    <td class="draw">{{ value.draw }}</td>
+	                    <td class="lost">{{ value.lose }}</td>
+	                    <td class="bonus">{{ value.bonus }}</td>
+	                    <td class="pts">{{ (value.win * 3) + value.draw + value.bonus }}</td>
+	                </tr>
+	            </table>
+	        </div>
+	    </div>
 	
-		    </div>
-		    
-	    
-		</div>
+	    <div ng-show="showFixtures">
+	        <div class="well col-sm-6 col-sm-offset-3">
+	            <form name="fixform" class="form-horizontal box" novalidate ng-submit="addFixture()">
+	                
+	                <div id="selections">
+		                <select class="form-control" name="home" ng-model="home" required>
+		                    <option value="">Player</option>
+		                    <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
+		                </select>
+		                <span class="versus">v</span>
+		                <select class="form-control" name="away" ng-model="away" required>
+		                    <option value="">Player</option>
+		                    <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
+		                </select>
+		                <ul id="scores">
+							<li class="scorebutton">5/4</li>
+							<li class="scorebutton">5/3</li>
+							<li class="scorebutton">4/3</li>
+							<li class="scorebutton">4/2</li>
+							<li class="scorebutton">3/2</li>
+							<li class="scorebutton">3/1</li>
+							<li class="scorebutton">2/1</li>
+							<li class="scorebutton">2up</li>
+							<li class="scorebutton">1up</li>
+							<li class="scorebutton">Draw</li>	
+						</ul>
 
+		              </div>
+	                <input type="submit" class="btn btn-success" value="Add Result" ng-disabled="fixform.$invalid">
+	            </form>
+	        </div>
+	
+	        <div class="well col-sm-6 col-sm-offset-3 box">
+	            <ul>
+	                <li ng-cloak ng-repeat="(key, fixture) in data.fixtures">
+	                    <em>{{fixture.timestamp | date:'mediumDate'}}</em>
+	                    <span class="pull-right">
+	                        {{fixture.result}}
+	                        <a href="" ng-click="deleteFixture(key)"><span class="deleteRes"></span></a>
+	                    </span>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
+</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+
     <script type="text/javascript">
     angular.module('league', ['firebase']).controller('LeagueCtrl', ['$scope', '$firebase',
         function($scope, $firebase) {
-            var fixtures_ref = new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/');
-            var golfers_ref = new Firebase('https://shining-fire-8454.firebaseio.com/golfers/');
-
-            $scope.fixtures = $firebase(fixtures_ref);
-            $scope.golfers = $firebase(golfers_ref);
+            var FB_ROOT = 'https://shining-fire-8454.firebaseio.com';
+            var data_ref = new Firebase(FB_ROOT);
+            $scope.data = $firebase(data_ref);
+            $scope.showFixtures = true;
 
             $scope.generateTable = function() {
                 var table = {};
-                angular.forEach($scope.golfers, function(value, key) {
+                angular.forEach($scope.data.golfers, function(value, key) {
                     if (value.name) {
                         table[value.name] = {
-                            "name": "" + value.name,
-                            "win": 0,
-                            "lose": 0,
-                            "draw": 0
+                            name: "" + value.name,
+                            facebook: "" + value.facebook,
+                            twitter: "" + value.twitter,
+                            win: 0,
+                            lose: 0,
+                            draw: 0,
+                            bonus: 0,
                         };
                     }
                 });
 
-                angular.forEach($scope.fixtures, function(fvalue, fkey) {
+                angular.forEach($scope.data.fixtures, function(fvalue, fkey) {
                     if (fvalue.stats) {
                         angular.forEach(fvalue.stats, function(svalue, skey) {
                             if (table[svalue.golfer]) {
-                                angular.forEach(["win", "lose", "draw"], function(type) {
+                                angular.forEach(["win", "lose", "draw", "bonus"], function(type) {
                                     if (svalue[type]) {
                                         table[svalue.golfer][type] = table[svalue.golfer][type] + svalue[type];
                                     }
@@ -169,33 +137,58 @@ $( document ).ready(function() {
                 $scope.trows = _.values(table);
             };
 
-            $scope.fixtures.$on('loaded', function(data) {
-                console.log(data);
-                // $scope.generateTable(); -- doesn't work as expected!!
-                // $scope.$apply(); -- doesn't work as expected!!
-            });
-
-            $scope.$watch('fixtures', $scope.generateTable, true);
+            $scope.$watch('data', $scope.generateTable, true);
 
             $scope.addFixture = function() {
+                console.log("AF")
                 if ($scope.home && $scope.away) {
-                    fixtures_ref.push({
-                        "timestamp": new Date().getTime(),
-                        "result": $scope.home + " beat " + $scope.away + " " + $scope.result,
-                        "stats": [{
-                            "golfer": "" + $scope.home,
-                            "win": 1
+                    if ($scope.result == 'All Square') {
+                        new Firebase(FB_ROOT + '/fixtures/').push({
+                            timestamp: new Date().getTime(),
+                            result: $scope.home + " drew with " + $scope.away + " " + $scope.result,
+                            stats: [{
+                                golfer: "" + $scope.home,
+                                draw: 1
+                            }, {
+                                golfer: "" + $scope.away,
+                                draw: 1
+                            }]
+                        });
+                        return;
+                    }
+
+                    if ($scope.result == '5 and 4') {
+                        new Firebase(FB_ROOT + '/fixtures/').push({
+                            timestamp: new Date().getTime(),
+                            result: $scope.home + " hammered " + $scope.away + " " + $scope.result,
+                            stats: [{
+                                golfer: "" + $scope.home,
+                                win: 1,
+                                bonus: 1
+                            }, {
+                                golfer: "" + $scope.away,
+                                lose: 1
+                            }]
+                        });
+                        return;
+                    }
+
+                    new Firebase(FB_ROOT + '/fixtures/').push({
+                        timestamp: new Date().getTime(),
+                        result: $scope.home + " v " + $scope.away + " " + $scope.result,
+                        stats: [{
+                            golfer: "" + $scope.home,
+                            win: 1
                         }, {
-                            "golfer": "" + $scope.away,
-                            "lose": 1
+                            golfer: "" + $scope.away,
+                            lose: 1
                         }]
                     });
                 }
             };
 
-            $scope.deleteFixture = function(id){
-              var itemRef = new Firebase('https://shining-fire-8454.firebaseio.com/fixtures/' + id);
-              itemRef.remove();
+            $scope.deleteFixture = function(id) {
+                new Firebase(FB_ROOT + '/fixtures/' + id).remove();
             };
         }
     ]);

@@ -67,14 +67,15 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* line 11, ../sass/partials/custom/_layout.scss */
 body {
-  background: #427b00;
-  font-family: "Helvetica Neue";
+  background: #3e7400;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 300;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3); }
-  /* line 16, ../sass/partials/custom/_layout.scss */
+  /* line 17, ../sass/partials/custom/_layout.scss */
   body #wrapper {
     padding: 10px;
     border-top: 1px solid rgba(255, 255, 255, 0.1); }
-  /* line 21, ../sass/partials/custom/_layout.scss */
+  /* line 22, ../sass/partials/custom/_layout.scss */
   body .box {
     background: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(0, 0, 0, 0.25);
@@ -82,28 +83,28 @@ body {
     width: 100%;
     margin-bottom: 10px;
     color: rgba(255, 255, 255, 0.8); }
-  /* line 32, ../sass/partials/custom/_layout.scss */
+  /* line 33, ../sass/partials/custom/_layout.scss */
   body #headerBar {
     width: 100%;
     background: rgba(0, 0, 0, 0.1);
     height: 49px;
-    border-bottom: 1px solid #0b1500;
+    border-bottom: 1px solid #070e00;
     padding: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
-    /* line 40, ../sass/partials/custom/_layout.scss */
+    /* line 41, ../sass/partials/custom/_layout.scss */
     body #headerBar h1 {
       display: inline-block;
-      color: rgba(255, 255, 255, 0.8);
+      color: #F8C21C;
       line-height: 30px;
       font-size: 18px;
       font-weight: bold; }
-    /* line 48, ../sass/partials/custom/_layout.scss */
+    /* line 49, ../sass/partials/custom/_layout.scss */
     body #headerBar ul {
       display: inline-block;
       float: right;
       margin: 0;
       padding: 0; }
-    /* line 55, ../sass/partials/custom/_layout.scss */
+    /* line 56, ../sass/partials/custom/_layout.scss */
     body #headerBar li {
       text-decoration: none;
       width: 80px;
@@ -111,48 +112,54 @@ body {
       line-height: 30px;
       background: rgba(0, 0, 0, 0.1);
       text-align: center;
-      color: rgba(255, 255, 255, 0.6);
+      color: rgba(255, 255, 255, 0.8);
       font-size: 14px; }
-      /* line 66, ../sass/partials/custom/_layout.scss */
+      /* line 67, ../sass/partials/custom/_layout.scss */
       body #headerBar li.selected {
         color: #eee !important;
         background: rgba(0, 0, 0, 0.15) !important; }
-  /* line 74, ../sass/partials/custom/_layout.scss */
+  /* line 75, ../sass/partials/custom/_layout.scss */
   body table {
     color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.25);
     width: 100%;
     background: rgba(255, 255, 255, 0.1); }
-    /* line 81, ../sass/partials/custom/_layout.scss */
+    /* line 82, ../sass/partials/custom/_layout.scss */
+    body table .player {
+      display: inline-block;
+      line-height: 43px;
+      padding-left: 10px; }
+    /* line 88, ../sass/partials/custom/_layout.scss */
     body table th {
       font-size: 15px;
       height: 43px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06); }
-      /* line 88, ../sass/partials/custom/_layout.scss */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      background: rgba(255, 255, 255, 0.05); }
+      /* line 96, ../sass/partials/custom/_layout.scss */
       body table th.golfer {
         width: 50%;
-        padding-left: 5px; }
-      /* line 93, ../sass/partials/custom/_layout.scss */
+        padding-left: 10px; }
+      /* line 101, ../sass/partials/custom/_layout.scss */
       body table th.win, body table th.draw, body table th.lost, body table th.pts, body table th.bonus {
         width: 10%;
         text-align: center; }
-    /* line 101, ../sass/partials/custom/_layout.scss */
+    /* line 109, ../sass/partials/custom/_layout.scss */
     body table td {
       /* background: rgba(255,255,255,0.055); */
       height: 43px; }
-      /* line 105, ../sass/partials/custom/_layout.scss */
+      /* line 114, ../sass/partials/custom/_layout.scss */
       body table td.golfer {
         width: 50%;
         padding-left: 5px; }
-      /* line 111, ../sass/partials/custom/_layout.scss */
+      /* line 120, ../sass/partials/custom/_layout.scss */
       body table td.win, body table td.draw, body table td.lost, body table td.pts, body table td.bonus {
         width: 10%;
         text-align: center; }
-    /* line 118, ../sass/partials/custom/_layout.scss */
+    /* line 127, ../sass/partials/custom/_layout.scss */
     body table tr {
       width: 100%;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
-      /* line 123, ../sass/partials/custom/_layout.scss */
+      /* line 132, ../sass/partials/custom/_layout.scss */
       body table tr:last-child {
         height: 43px;
         border: 1px solid rgba(0, 0, 0, 0.25);
@@ -162,24 +169,24 @@ body {
         -moz-border-radius-bottomleft: 3px;
         border-bottom-right-radius: 3px;
         border-bottom-left-radius: 3px; }
-  /* line 144, ../sass/partials/custom/_layout.scss */
+  /* line 153, ../sass/partials/custom/_layout.scss */
   body #selections {
     width: 100%;
     display: table;
     color: #fff !important; }
-    /* line 149, ../sass/partials/custom/_layout.scss */
+    /* line 158, ../sass/partials/custom/_layout.scss */
     body #selections .form-control {
       color: #fff !important;
       text-align: center; }
-    /* line 154, ../sass/partials/custom/_layout.scss */
+    /* line 163, ../sass/partials/custom/_layout.scss */
     body #selections .versus {
-      display: table-cell;
+      display: inline-block;
       width: 6%;
       text-align: center; }
-    /* line 160, ../sass/partials/custom/_layout.scss */
+    /* line 169, ../sass/partials/custom/_layout.scss */
     body #selections select {
-      width: 100%;
-      display: table-cell;
+      width: 47%;
+      display: inline-block;
       background: white !important;
       -webkit-appearance: none;
       height: 42px;
@@ -188,9 +195,9 @@ body {
       color: rgba 255, 255, 255, 0.7 !important;
       border: 1px solid rgba(0, 0, 0, 0.25);
       background: url("../images/dropDownArrow.png") no-repeat right center !important; }
-  /* line 182, ../sass/partials/custom/_layout.scss */
+  /* line 191, ../sass/partials/custom/_layout.scss */
   body input[value='Add Result'] {
-    border: 1px solid #274800;
+    border: 1px solid #234100;
     -webkit-appearance: none;
     background: rgba(0, 0, 0, 0.15);
     border: 1px solid rgba(0, 0, 0, 0.25);
@@ -198,12 +205,11 @@ body {
     color: rgba(255, 255, 255, 0.85);
     font-size: 1em;
     width: 100%;
-    float: left;
     height: 42px; }
-  /* line 195, ../sass/partials/custom/_layout.scss */
+  /* line 203, ../sass/partials/custom/_layout.scss */
   body input[value='Add Result']:hover {
-    background-color: #3a6c00; }
-  /* line 196, ../sass/partials/custom/_layout.scss */
+    background-color: #366500; }
+  /* line 207, ../sass/partials/custom/_layout.scss */
   body ul#scores {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -212,7 +218,7 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.25);
     /* 	background: rgba(255,255,255,0.08); */
     padding: 0; }
-  /* line 207, ../sass/partials/custom/_layout.scss */
+  /* line 218, ../sass/partials/custom/_layout.scss */
   body li.scorebutton {
     width: 20%;
     height: 42px;
@@ -224,39 +230,56 @@ body {
     font-size: 13px;
     line-height: 42px;
     padding: 0; }
-    /* line 219, ../sass/partials/custom/_layout.scss */
+    /* line 230, ../sass/partials/custom/_layout.scss */
     body li.scorebutton.selected {
       color: #fff !important;
       background: rgba(0, 0, 0, 0.15) !important; }
-    /* line 224, ../sass/partials/custom/_layout.scss */
+    /* line 235, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:hover {
       background: rgba(0, 0, 0, 0.1) !important;
       color: #FFF; }
-    /* line 229, ../sass/partials/custom/_layout.scss */
+    /* line 240, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:nth-child(-n+5) {
       border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
-    /* line 233, ../sass/partials/custom/_layout.scss */
+    /* line 244, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:nth-child(-n+4) {
       border-right: 1px solid rgba(0, 0, 0, 0.15); }
-    /* line 237, ../sass/partials/custom/_layout.scss */
+    /* line 248, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:nth-child(n+6) {
       border-right: 1px solid rgba(0, 0, 0, 0.15); }
-    /* line 241, ../sass/partials/custom/_layout.scss */
+    /* line 252, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:last-child {
       margin-right: 0px;
       border-right: none; }
-    /* line 247, ../sass/partials/custom/_layout.scss */
+    /* line 258, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:first-child {
       margin-left: 0px; }
-  /* line 256, ../sass/partials/custom/_layout.scss */
+  /* line 267, ../sass/partials/custom/_layout.scss */
   body em {
     display: inline-block;
     color: rgba(255, 255, 255, 0.5);
     height: 29px; }
-  /* line 263, ../sass/partials/custom/_layout.scss */
+  /* line 273, ../sass/partials/custom/_layout.scss */
   body .delete {
     float: right;
     color: rgba(255, 255, 255, 0.5); }
+  /* line 278, ../sass/partials/custom/_layout.scss */
+  body .img-circle {
+    background-size: cover;
+    display: inline-block;
+    border-radius: 140px;
+    -webkit-border-radius: 140px;
+    -moz-border-radius: 140px;
+    float: left; }
+  /* line 287, ../sass/partials/custom/_layout.scss */
+  body .deleteRes {
+    float: right;
+    background: url("../images/delete.png");
+    width: 18px;
+    height: 18px; }
+  /* line 294, ../sass/partials/custom/_layout.scss */
+  body .pull-right {
+    padding-left: 5px; }
 
 /* line 1, ../sass/partials/custom/_placeholders.scss */
 body .box, body #headerBar li, body input[value='Add Result'], body ul#scores {

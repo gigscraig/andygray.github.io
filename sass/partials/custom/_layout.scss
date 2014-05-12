@@ -1,6 +1,6 @@
 
 
-$base-color: #427B00;
+$base-color: #3E7400;
 
 
 
@@ -10,7 +10,8 @@ clear:both;}
 
 body{
 	background: $base-color;
-	font-family: "Helvetica Neue";
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
 	text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
 
 #wrapper{
@@ -39,7 +40,7 @@ body{
 	
 		h1{	
 			display:inline-block;
-			color: rgba(255,255,255,0.8);
+			color: #F8C21C;;
 			line-height:30px;
 			font-size:18px;
 			font-weight: bold;
@@ -60,7 +61,7 @@ body{
 			background: rgba(0,0,0,0.1);
 			text-align:center;
 			@extend %radius;
-			color: rgba(255,255,255,0.6);
+			color: rgba(255,255,255,0.8);
 			font-size:14px;
 		
 			&.selected{
@@ -78,16 +79,23 @@ body{
 		width:100%;
 		background: rgba(255,255,255,0.1);
 		
+		.player{
+				display: inline-block;
+				line-height: 43px;
+				padding-left: 10px;
+			}
+		
 		th{
 			
 			font-size:15px;
 			height:43px;
 			border-bottom: 1px solid rgba(0,0,0,0.06);
+			background: rgba(255,255,255,0.05);
 
 			
 			&.golfer{
 				width:50%;
-				padding-left:5px;
+				padding-left:10px;
 			}
 			
 			&.win, &.draw, &.lost, &.pts, &.bonus{
@@ -101,6 +109,7 @@ body{
 		td{
 			/* background: rgba(255,255,255,0.055); */
 			height:43px;
+		
 			
 			&.golfer{
 				width:50%;
@@ -152,14 +161,14 @@ body{
 		}
 			
 		.versus{
-			display:table-cell;
+			display:inline-block;
 			width:6%;
 			text-align: center;
 		}	
 	
 		select{
-			width:100%;
-			display: table-cell;
+			width:47%;
+			display: inline-block;
 			background: rgba(255,255,255,1) !important;
 			-webkit-appearance: none;
 			 height:42px;
@@ -187,12 +196,14 @@ body{
 		  color:rgba(255,255,255,0.85);
 		  font-size:1em;
 		  width:100%;
-		  float:left;
 		  height:42px;
 		  @extend %radius;
-		
-		}
-		input[value='Add Result']:hover {background-color:darken($base-color,3%);}	
+		  }
+	
+	input[value='Add Result']:hover {background-color:darken($base-color,3%);}	
+	
+	
+	
 	ul#scores{
 		margin-top:10px;
 		margin-bottom: 10px;
@@ -217,8 +228,8 @@ body{
 		padding:0;
 		
 		&.selected{
-				color:#fff !important;
-				background: rgba(0,0,0,0.15) !important;
+		 	color:#fff !important;
+			background: rgba(0,0,0,0.15) !important;
 			}
 		
 		&:hover{
@@ -227,15 +238,15 @@ body{
 		}
 		
 		&:nth-child(-n+5) {
-	    border-bottom: 1px solid rgba(0,0,0,0.15);   
+	    	border-bottom: 1px solid rgba(0,0,0,0.15);   
 		}
 	
 		&:nth-child(-n+4) {
-	    border-right: 1px solid rgba(0,0,0,0.15);   
+	   	    border-right: 1px solid rgba(0,0,0,0.15);   
 		}
 		
 		&:nth-child(n+6) {
-	    border-right: 1px solid rgba(0,0,0,0.15);   
+	    	border-right: 1px solid rgba(0,0,0,0.15);   
 		}
 		
 		&:last-child{
@@ -254,15 +265,34 @@ body{
 		}
 	
 		em{
-		display:inline-block;
-		color:rgba(255,255,255,0.5);
-		height:29px;
-
+			display:inline-block;
+			color:rgba(255,255,255,0.5);
+			height:29px;
 		}
 	
 		.delete{
 			float:right;
 			color:rgba(255,255,255,0.5);
+		}
+		
+		.img-circle{
+			background-size: cover;
+			display: inline-block;
+			border-radius: 140px;
+			-webkit-border-radius: 140px;
+			-moz-border-radius: 140px;
+			float:left;
+		}
+		
+		.deleteRes{
+			float:right;
+			background: url('../images/delete.png');
+			width:18px;
+			height:18px;
+		}
+		
+		.pull-right{
+			padding-left:5px;
 		}
 	
 }
