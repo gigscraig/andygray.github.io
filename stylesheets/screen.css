@@ -270,14 +270,17 @@ body {
     border-radius: 140px;
     -webkit-border-radius: 140px;
     -moz-border-radius: 140px;
-    float: left; }
-  /* line 287, ../sass/partials/custom/_layout.scss */
+    float: left;
+    width: 34px;
+    height: 39px;
+    padding-top: 5px; }
+  /* line 290, ../sass/partials/custom/_layout.scss */
   body .deleteRes {
     float: right;
     background: url("../images/delete.png");
     width: 18px;
     height: 18px; }
-  /* line 294, ../sass/partials/custom/_layout.scss */
+  /* line 297, ../sass/partials/custom/_layout.scss */
   body .pull-right {
     padding-left: 5px; }
 
