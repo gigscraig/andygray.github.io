@@ -81,7 +81,7 @@
 	        <div class="well col-sm-6 col-sm-offset-3 box">
 	            <ul>
 	                <li ng-cloak ng-repeat="(key, fixture) in data.fixtures">
-	                    <em>{{fixture.timestamp | date:'mediumDate'}}</em>
+	                    <em>{{fixture.timestamp | date:'shortDate'}}</em>
 	                    <span class="pull-right">
 	                        {{fixture.result}}
 	                        <a href="" ng-click="deleteFixture(key)"><span class="deleteRes"></span></a>
