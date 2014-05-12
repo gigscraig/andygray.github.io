@@ -72,7 +72,7 @@ html {
 /* line 11, ../sass/partials/custom/_layout.scss */
 body {
   background: #3e7400;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "Helvetica Neue","HelveticaNeue-Light", "Helvetica Neue Light", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3); }
   /* line 17, ../sass/partials/custom/_layout.scss */
@@ -224,7 +224,7 @@ body {
     display: table;
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.25);
-    /* 	background: rgba(255,255,255,0.08); */
+    background: rgba(0, 0, 0, 0.1);
     padding: 0; }
   /* line 223, ../sass/partials/custom/_layout.scss */
   body li.scorebutton {
