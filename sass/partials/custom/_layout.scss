@@ -2,7 +2,7 @@
 
 $base-color: #3E7400;
 
-
+html { -webkit-font-smoothing: antialiased; }
 
 * { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
 clear:both;}
@@ -120,6 +120,11 @@ body{
 			&.win, &.draw, &.lost, &.pts, &.bonus{
 				width:10%;
 				text-align:center;
+			}
+			
+			&.pts{
+				font-weight: bold;
+				color:#FFF !important;
 			}
 			
 		}

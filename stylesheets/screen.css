@@ -58,6 +58,10 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
   display: block; }
 
+/* line 5, ../sass/partials/custom/_layout.scss */
+html {
+  -webkit-font-smoothing: antialiased; }
+
 /* line 7, ../sass/partials/custom/_layout.scss */
 * {
   -moz-box-sizing: border-box;
@@ -155,11 +159,15 @@ body {
       body table td.win, body table td.draw, body table td.lost, body table td.pts, body table td.bonus {
         width: 10%;
         text-align: center; }
-    /* line 127, ../sass/partials/custom/_layout.scss */
+      /* line 125, ../sass/partials/custom/_layout.scss */
+      body table td.pts {
+        font-weight: bold;
+        color: #FFF !important; }
+    /* line 132, ../sass/partials/custom/_layout.scss */
     body table tr {
       width: 100%;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
-      /* line 132, ../sass/partials/custom/_layout.scss */
+      /* line 137, ../sass/partials/custom/_layout.scss */
       body table tr:last-child {
         height: 43px;
         border: 1px solid rgba(0, 0, 0, 0.25);
@@ -169,21 +177,21 @@ body {
         -moz-border-radius-bottomleft: 3px;
         border-bottom-right-radius: 3px;
         border-bottom-left-radius: 3px; }
-  /* line 153, ../sass/partials/custom/_layout.scss */
+  /* line 158, ../sass/partials/custom/_layout.scss */
   body #selections {
     width: 100%;
     display: table;
     color: #fff !important; }
-    /* line 158, ../sass/partials/custom/_layout.scss */
+    /* line 163, ../sass/partials/custom/_layout.scss */
     body #selections .form-control {
       color: #fff !important;
       text-align: center; }
-    /* line 163, ../sass/partials/custom/_layout.scss */
+    /* line 168, ../sass/partials/custom/_layout.scss */
     body #selections .versus {
       display: inline-block;
       width: 6%;
       text-align: center; }
-    /* line 169, ../sass/partials/custom/_layout.scss */
+    /* line 174, ../sass/partials/custom/_layout.scss */
     body #selections select {
       width: 47%;
       display: inline-block;
@@ -195,7 +203,7 @@ body {
       color: rgba 255, 255, 255, 0.7 !important;
       border: 1px solid rgba(0, 0, 0, 0.25);
       background: url("../images/dropDownArrow.png") no-repeat right center !important; }
-  /* line 191, ../sass/partials/custom/_layout.scss */
+  /* line 196, ../sass/partials/custom/_layout.scss */
   body input[value='Add Result'] {
     border: 1px solid #234100;
     -webkit-appearance: none;
@@ -206,10 +214,10 @@ body {
     font-size: 1em;
     width: 100%;
     height: 42px; }
-  /* line 203, ../sass/partials/custom/_layout.scss */
+  /* line 208, ../sass/partials/custom/_layout.scss */
   body input[value='Add Result']:hover {
     background-color: #366500; }
-  /* line 207, ../sass/partials/custom/_layout.scss */
+  /* line 212, ../sass/partials/custom/_layout.scss */
   body ul#scores {
     margin-top: 10px;
     margin-bottom: 10px;
@@ -218,7 +226,7 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.25);
     /* 	background: rgba(255,255,255,0.08); */
     padding: 0; }
-  /* line 218, ../sass/partials/custom/_layout.scss */
+  /* line 223, ../sass/partials/custom/_layout.scss */
   body li.scorebutton {
     width: 20%;
     height: 42px;
@@ -230,40 +238,40 @@ body {
     font-size: 13px;
     line-height: 42px;
     padding: 0; }
-    /* line 230, ../sass/partials/custom/_layout.scss */
+    /* line 235, ../sass/partials/custom/_layout.scss */
     body li.scorebutton.selected {
       color: #fff !important;
       background: rgba(0, 0, 0, 0.15) !important; }
-    /* line 235, ../sass/partials/custom/_layout.scss */
+    /* line 240, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:hover {
       background: rgba(0, 0, 0, 0.1) !important;
       color: #FFF; }
-    /* line 240, ../sass/partials/custom/_layout.scss */
+    /* line 245, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:nth-child(-n+5) {
       border-bottom: 1px solid rgba(0, 0, 0, 0.15); }
-    /* line 244, ../sass/partials/custom/_layout.scss */
+    /* line 249, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:nth-child(-n+4) {
       border-right: 1px solid rgba(0, 0, 0, 0.15); }
-    /* line 248, ../sass/partials/custom/_layout.scss */
+    /* line 253, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:nth-child(n+6) {
       border-right: 1px solid rgba(0, 0, 0, 0.15); }
-    /* line 252, ../sass/partials/custom/_layout.scss */
+    /* line 257, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:last-child {
       margin-right: 0px;
       border-right: none; }
-    /* line 258, ../sass/partials/custom/_layout.scss */
+    /* line 263, ../sass/partials/custom/_layout.scss */
     body li.scorebutton:first-child {
       margin-left: 0px; }
-  /* line 267, ../sass/partials/custom/_layout.scss */
+  /* line 272, ../sass/partials/custom/_layout.scss */
   body em {
     display: inline-block;
     color: rgba(255, 255, 255, 0.5);
     height: 29px; }
-  /* line 273, ../sass/partials/custom/_layout.scss */
+  /* line 278, ../sass/partials/custom/_layout.scss */
   body .delete {
     float: right;
     color: rgba(255, 255, 255, 0.5); }
-  /* line 278, ../sass/partials/custom/_layout.scss */
+  /* line 283, ../sass/partials/custom/_layout.scss */
   body .img-circle {
     background-size: cover;
     display: inline-block;
@@ -274,13 +282,13 @@ body {
     width: 34px;
     height: 39px;
     padding-top: 5px; }
-  /* line 290, ../sass/partials/custom/_layout.scss */
+  /* line 295, ../sass/partials/custom/_layout.scss */
   body .deleteRes {
     float: right;
     background: url("../images/delete.png");
     width: 18px;
     height: 18px; }
-  /* line 297, ../sass/partials/custom/_layout.scss */
+  /* line 302, ../sass/partials/custom/_layout.scss */
   body .pull-right {
     padding-left: 5px; }
 
