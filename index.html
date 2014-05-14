@@ -2,95 +2,131 @@
 
 <head>
     <link rel="stylesheet" href="stylesheets/screen.css">
-    <title>Summer League</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CGCSL</title>
 </head>
 
 <body ng-app="league" ng-controller="LeagueCtrl">
-    
-    
-    		<div id="headerBar">
-			<h1>CGCSL</h1>
-			
-			<ul>
-				<li class="table" value="Table" ng-click="showFixtures = false">Table</li>
-				<li class=" results" value="Fixture" ng-click="showFixtures = true">Results</li>
-			</ul>
-			
-		</div>
-    
+
+    <div id="headerBar">
+        <h1>CGCSL</h1>
+
+        <ul>
+            <li value="Table" ng-click="showFixtures = false" ng-class="{selected: showFixtures == false, table: true}">Table</li>
+            <li value="Fixture" ng-click="showFixtures = true" ng-class="{selected: showFixtures == true, results: true}">Results</li>
+        </ul>
+
+    </div>
+
     <div id="wrapper">
+        <div ng-hide="showFixtures">
+            <div class="well col-sm-6 col col-sm-offset-3">
+                <table class="table table-striped">
+                    <tr>
+                        <th class="golfer">Player</th>
+                        <th class="win">W</th>
+                        <th class="draw">D</th>
+                        <th class="lost">L</th>
+                        <th class="bonus">B</th>
+                        <th class="pts">Pts</th>
+                    </tr>
+                    <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw + bonus':true">
+                        <td class="golfer">
+                            <img src="http://graph.facebook.com/{{value.facebook}}/picture" alt="{{ value.name }}" class="img-circle">
+                            <span class="player">{{ value.name }}</span>
+                        </td>
+                        <td class="win">{{ value.win }}</td>
+                        <td class="draw">{{ value.draw }}</td>
+                        <td class="lost">{{ value.lose }}</td>
+                        <td class="bonus">{{ value.bonus }}</td>
+                        <td class="pts">{{ (value.win * 3) + value.draw + value.bonus }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-	    <div ng-hide="showFixtures">
-	        <div class="well col-sm-6 col col-sm-offset-3">
-	            <table class="table table-striped">
-	                <tr>
-	                    <th class="golfer">Player</th>
-	                    <th class="win">W</th>
-	                    <th class="draw">D</th>
-	                    <th class="lost">L</th>
-	                    <th class="bonus">B</th>
-	                    <th class="pts">Pts</th>
-	                </tr>
-	                <tr ng-cloak ng-repeat="value in trows|orderBy:'(win * 3) + draw + bonus':true">
-	                    <td class="golfer">
-	                        <img src="http://graph.facebook.com/{{value.facebook}}/picture" alt="{{ value.name }}" class="img-circle"> 
-	                     <span class="player">{{ value.name }}</span>
-	                    </td>
-	                    <td class="win">{{ value.win }}</td>
-	                    <td class="draw">{{ value.draw }}</td>
-	                    <td class="lost">{{ value.lose }}</td>
-	                    <td class="bonus">{{ value.bonus }}</td>
-	                    <td class="pts">{{ (value.win * 3) + value.draw + value.bonus }}</td>
-	                </tr>
-	            </table>
-	        </div>
-	    </div>
-	
-	    <div ng-show="showFixtures">
-	        <div class="well col-sm-6 col-sm-offset-3">
-	            <form name="fixform" class="form-horizontal box" novalidate ng-submit="addFixture()">
-	                
-	                <div id="selections">
-		                <select class="form-control" name="home" ng-model="home" required>
-		                    <option value="">Player</option>
-		                    <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
-		                </select>
-		                <span class="versus">v</span>
-		                <select class="form-control" name="away" ng-model="away" required>
-		                    <option value="">Player</option>
-		                    <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
-		                </select>
-		                <ul id="scores">
-							<li class="scorebutton">5/4</li>
-							<li class="scorebutton">5/3</li>
-							<li class="scorebutton">4/3</li>
-							<li class="scorebutton">4/2</li>
-							<li class="scorebutton">3/2</li>
-							<li class="scorebutton">3/1</li>
-							<li class="scorebutton">2/1</li>
-							<li class="scorebutton">2up</li>
-							<li class="scorebutton">1up</li>
-							<li class="scorebutton">Draw</li>	
+        <div ng-show="showFixtures">
+            <div class="well col-sm-6 col-sm-offset-3">
+                <form name="fixform" class="form-horizontal box" novalidate ng-submit="addFixture()">
+
+                    <div id="selections">
+                        <!--
+						<select class="form-control" name="home" ng-model="home" required>
+                            <option value="">Player</option>
+                            <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
+                        </select>
+
+                        <span class="versus" ng-switch="result">
+                            <span ng-switch-when="undefined">vs</span>
+                            <span ng-switch-when="Draw">drew</span>
+                            <span ng-switch-default>beat</span>
+                        </span>
+
+                        <select class="form-control" name="away" ng-model="away" required>
+                            <option value="">Player</option>
+                            <option ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}</option>
+                        </select>
+						-->
+						
+						<div class="Playername" ng-model ="home" required>Player</div>		
+						
+						<span class="versus" ng-switch="result">
+                            <span ng-switch-when="undefined">vs</span>
+                            <span ng-switch-when="Draw">drew</span>
+                            <span ng-switch-default>beat</span>
+                        </span>
+						
+						<div class="Playername" ng-model ="away" required>Player</div>
+						
+										
+                        <ul id="scores">
+                            <li ng-click="result = '5/4'" ng-class="{selected: result == '5/4', scorebutton: true}">5/4</li>
+                            <li ng-click="result = '5/3'" ng-class="{selected: result == '5/3', scorebutton: true}">5/3</li>
+                            <li ng-click="result = '4/3'" ng-class="{selected: result == '4/3', scorebutton: true}">4/3</li>
+                            <li ng-click="result = '4/2'" ng-class="{selected: result == '4/2', scorebutton: true}">4/2</li>
+                            <li ng-click="result = '3/2'" ng-class="{selected: result == '3/2', scorebutton: true}">3/2</li>
+                            <li ng-click="result = '3/1'" ng-class="{selected: result == '3/1', scorebutton: true}">3/1</li>
+                            <li ng-click="result = '2/1'" ng-class="{selected: result == '2/1', scorebutton: true}">2/1</li>
+                            <li ng-click="result = '2up'" ng-class="{selected: result == '2up', scorebutton: true}">2up</li>
+                            <li ng-click="result = '1up'" ng-class="{selected: result == '1up', scorebutton: true}">1up</li>
+                            <li ng-click="result = 'Draw'" ng-class="{selected: result == 'Draw', scorebutton: true}">Draw</li>
+                        </ul>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Add Result" ng-disabled="fixform.$invalid">
+                </form>
+            </div>
+			
+			<div id="playerDropDowns">			
+			
+						<ul id="homeplayers" ng-class="hide">
+							<div class="popover-arrow"></div>
+							<li name ="home" ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}
 						</ul>
+						
+												
+						
+						<ul id="awayplayers">
+						<div class="popover-arrow"></div>
+							 <li name ="away" ng-repeat="golfer in data.golfers" value="{{ golfer.name }}" />{{ golfer.name}}
+						</ul>
+			</div>
+			
 
-		              </div>
-	                <input type="submit" class="btn btn-success" value="Add Result" ng-disabled="fixform.$invalid">
-	            </form>
-	        </div>
-	
-	        <div class="well col-sm-6 col-sm-offset-3 box">
-	            <ul>
-	                <li ng-cloak ng-repeat="(key, fixture) in data.fixtures">
-	                    <em>{{fixture.timestamp | date:'shortDate'}}</em>
-	                    <span class="pull-right">
-	                        {{fixture.result}}
-	                        <a href="" ng-click="deleteFixture(key)"><span class="deleteRes"></span></a>
-	                    </span>
+       
+                	<ul id="resultList">
+		                <li class="resultbox" ng-cloak ng-repeat="(key, fixture) in data.fixtures">
+						<span class="timeStamp">
+		                    <em>{{fixture.timestamp | date:'shortDate'}}</em>
+							<span class="pull-right">{{fixture.result}}</span>
+						</span>
+	                     <a href="" ng-click="deleteFixture(key)"><img src="images/delete.png" alt="delete" width="26" height="26" /></a>
+						 	
 	                </li>
 	            </ul>
-	        </div>
-	    </div>
-</div>
+          
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
     <script src="https://cdn.firebase.com/v0/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.5.0/angularfire.min.js"></script>
@@ -142,7 +178,7 @@
             $scope.addFixture = function() {
                 console.log("AF")
                 if ($scope.home && $scope.away) {
-                    if ($scope.result == 'All Square') {
+                    if ($scope.result == 'Draw') {
                         new Firebase(FB_ROOT + '/fixtures/').push({
                             timestamp: new Date().getTime(),
                             result: $scope.home + " drew with " + $scope.away + " " + $scope.result,
@@ -157,7 +193,7 @@
                         return;
                     }
 
-                    if ($scope.result == '5 and 4') {
+                    if ($scope.result == '5/4') {
                         new Firebase(FB_ROOT + '/fixtures/').push({
                             timestamp: new Date().getTime(),
                             result: $scope.home + " hammered " + $scope.away + " " + $scope.result,
@@ -175,7 +211,7 @@
 
                     new Firebase(FB_ROOT + '/fixtures/').push({
                         timestamp: new Date().getTime(),
-                        result: $scope.home + " v " + $scope.away + " " + $scope.result,
+                        result: $scope.home + " beat " + $scope.away + " " + $scope.result,
                         stats: [{
                             golfer: "" + $scope.home,
                             win: 1
