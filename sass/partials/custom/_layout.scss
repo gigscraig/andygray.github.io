@@ -173,19 +173,27 @@ body{
 	#playerDropDowns{
 		display:table;
 		width:100%;
-		padding:10px 30px 20px 12px;
+		padding:10px;
 		position:absolute;
 		top:110px;
 		z-index:2;
 		
 			ul#homeplayers{
-				margin-right:6%;
+				position:relative;
+				
 			}
 			
+			ul#awayplayers{
+				position:relative;
+				float:right;
+				right:20px;
+				padding-right:10px;
+			}
 			
 		
 		ul#homeplayers, ul#awayplayers{
 				display:inline-block;
+				position:absolute;
 				width:47%;
 				background: #D8D8D8;
 				color: #545454;
@@ -222,6 +230,7 @@ body{
 		
 		ul#homeplayers{
 			margin-right:6%;
+			
 		}
 				
 		.Playername{
